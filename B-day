@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>🎉 Happy Birthday! 🎉</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff6f91;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s forwards 0.5s;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #333;
+      max-width: 400px;
+      margin: 10px auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s forwards;
+    }
+
+    /* Typewriter effect for main message */
+    #typewriter {
+      font-size: 1.4em;
+      color: #444;
+      border-right: 2px solid #444;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      margin: 15px auto;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+    }
+
+    /* Floating hearts animation */
+    .heart {
+      position: fixed;
+      color: #ff6b81;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      user-select: none;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎂 Happy Birthday! 🎂</h1>
+  <div id="typewriter"></div>
+  <p id="msg2">💖 May your day be filled with smiles, laughter, and love 💖</p>
+  <p id="msg3">From someone who wishes you nothing but happiness 🫶</p>
+
+  <audio autoplay>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Typewriter text effect
+    const text = "Wishing you the happiest birthday ever! 🎉";
+    const typewriter = document.getElementById("typewriter");
+    let i = 0;
+    function typingEffect() {
+      if (i < text.length) {
+        typewriter.textContent += text.charAt(i);
+        i++;
+        setTimeout(typingEffect, 80);
+      }
+    }
+    setTimeout(typingEffect, 1000);
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
