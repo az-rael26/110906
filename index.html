@@ -3,165 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Sheina Mae!</title>
+  <title>Happy Birthday, Sheina Mae!</title>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     body {
-      height:100vh; overflow:hidden;
-      background:linear-gradient(135deg,#d9a7c7,#fffcdc);
-      display:flex; align-items:center; justify-content:center;
-      flex-direction:column; text-align:center; position:relative;
-    }
-    h1 {
-      font-size:2.8rem; color:#7b2cbf; text-shadow:0 0 15px #fff;
-      animation:glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow:0 0 10px #fff,0 0 20px #e0aaff; }
-      to { text-shadow:0 0 20px #fff,0 0 30px #c77dff; }
-    }
-    #tapBtn {
-      margin-top:40px; background:#c77dff; color:#fff;
-      border:none; padding:15px 25px; border-radius:30px;
-      font-size:1.2rem; cursor:pointer;
-      transition:transform 0.2s, background 0.2s;
-    }
-    #tapBtn:hover { background:#9d4edd; transform:scale(1.1); }
-    .floating-petal {
-      position:absolute; width:30px; height:30px;
-      background:url('https://cdn-icons-png.flaticon.com/512/7666/7666828.png') no-repeat center/contain;
-      animation:fall 10s linear infinite;
-      opacity:0.8;
-    }
-    @keyframes fall {
-      0% { transform:translateY(-10%) rotate(0deg); opacity:1; }
-      100% { transform:translateY(110vh) rotate(360deg); opacity:0; }
-    }
-    .page { position:absolute; width:100%; height:100%; top:0; left:0;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      transition:opacity 1s ease; }
-    .hidden { opacity:0; pointer-events:none; }
-    .show { opacity:1; pointer-events:auto; }
-    .message {
-      max-width:80%; color:#4a148c; font-size:1.4rem; background:#fff8;
-      padding:25px; border-radius:20px; box-shadow:0 0 10px rgba(0,0,0,0.1);
-    }
-    .navBtn {
-      margin-top:30px; background:#9d4edd; color:#fff; border:none;
-      padding:12px 25px; border-radius:25px; cursor:pointer;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f9e3ff, #d3b7ff);
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
     }
 
-    /* Shih tzu and cat cartoon */
-    .pets {
-      display:flex; gap:40px; margin-top:30px; align-items:flex-end;
+    h1 {
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
     }
-    .pet {
-      width:80px; height:80px; position:relative;
-      animation:bounce 1.5s infinite ease-in-out;
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    @keyframes bounce {
-      0%,100% { transform:translateY(0); }
-      50% { transform:translateY(-10px); }
+
+    .gif-container img {
+      width: 250px;
+      margin: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
     }
-    .cake {
-      width:60px; height:60px;
-      background:#ffb6c1; border-radius:10px; margin-top:20px; position:relative;
+
+    button {
+      background: #b57edc;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 10px rgba(181,126,220,0.6);
     }
-    .flame {
-      position:absolute; top:-20px; left:50%; transform:translateX(-50%);
-      width:10px; height:20px; background:radial-gradient(circle,#ffd700,#ff4500);
-      border-radius:50%; animation:flicker 0.2s infinite alternate;
+
+    button:hover {
+      background: #d8b4fe;
+      transform: scale(1.05);
     }
-    @keyframes flicker {
-      from { transform:translateX(-50%) scale(1); opacity:1; }
-      to { transform:translateX(-50%) scale(0.9); opacity:0.7; }
+
+    /* Petals animation */
+    .petal {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background-image: url('https://cdn.pixabay.com/photo/2017/01/31/13/14/petals-2027669_1280.png');
+      background-size: cover;
+      animation: fall linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message-page {
+      text-align: center;
+      padding: 40px;
+      max-width: 600px;
+      color: #fff;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Page 1 -->
-  <div id="page1" class="page show">
-    <h1>🎂 Happy Birthday, Sheina Mae!</h1>
-    <p id="clickText" style="margin-top:15px;color:#5a189a;">Tap the button 19 times 💜</p>
-    <button id="tapBtn">Tap here 💜</button>
+  <!-- PAGE 1 -->
+  <div id="page1">
+    <h1>🎂 Happy Birthday, Sheina Mae! 🎉</h1>
+    <div class="gif-container">
+      <img src="https://media.giphy.com/media/3o6ZsY2K4A3X3MtZsQ/giphy.gif" alt="Shih Tzu">
+      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat">
+      <img src="https://media.giphy.com/media/l0ExdMHUDKteztyfe/giphy.gif" alt="Cake">
+    </div>
+    <button id="tapButton">Tap here 💜 (0/19)</button>
+  </div>
 
-    <div class="pets">
-      <div class="pet" style="background:url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center/contain;"></div>
-      <div class="cake"><div class="flame"></div></div>
-      <div class="pet" style="background:url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center/contain; filter:hue-rotate(240deg);"></div>
+  <!-- PAGE 2 -->
+  <div id="page2" class="hidden">
+    <div class="message-page">
+      <h2>💌 Message Page 1</h2>
+      <p>Placeholder message here — write something sweet for Sheina Mae! 💜</p>
+      <button id="nextBtn1">Next 💕</button>
     </div>
   </div>
 
-  <!-- Page 2 -->
-  <div id="page2" class="page hidden" style="background:linear-gradient(135deg,#e0bbff,#cdb4db);">
-    <div class="message">
-      <p>💌 Placeholder message page 1. Replace this with your heartfelt words!</p>
+  <!-- PAGE 3 -->
+  <div id="page3" class="hidden">
+    <div class="message-page">
+      <h2>💫 Message Page 2</h2>
+      <p>Another message placeholder — maybe something heartfelt or funny! 🎁</p>
     </div>
-    <button class="navBtn" id="nextBtn">Next 💌</button>
   </div>
-
-  <!-- Page 3 -->
-  <div id="page3" class="page hidden" style="background:linear-gradient(135deg,#cdb4db,#e0bbff);">
-    <div class="message">
-      <p>🌸 Placeholder message page 2. More sweet words go here!</p>
-    </div>
-    <button class="navBtn" id="finishBtn">Finish 💐</button>
-  </div>
-
-  <!-- Music -->
-  <audio id="music1" src="https://cdn.pixabay.com/download/audio/2023/04/11/audio_7a8e8f0e6c.mp3?filename=happy-birthday-instrumental-14595.mp3" autoplay loop></audio>
-  <audio id="music2" src="https://cdn.pixabay.com/download/audio/2023/06/09/audio_2c8c814fe4.mp3?filename=soft-background-music-14661.mp3" loop></audio>
 
   <script>
-    // Petal generator
-    for(let i=0;i<15;i++){
-      const petal=document.createElement('div');
-      petal.classList.add('floating-petal');
-      petal.style.left=Math.random()*100+'%';
-      petal.style.animationDuration=(8+Math.random()*5)+'s';
+    // Create floating petals
+    for (let i = 0; i < 20; i++) {
+      let petal = document.createElement("div");
+      petal.classList.add("petal");
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDuration = 8 + Math.random() * 5 + "s";
+      petal.style.animationDelay = Math.random() * 5 + "s";
       document.body.appendChild(petal);
     }
 
-    const tapBtn=document.getElementById('tapBtn');
-    const clickText=document.getElementById('clickText');
-    const page1=document.getElementById('page1');
-    const page2=document.getElementById('page2');
-    const page3=document.getElementById('page3');
-    const nextBtn=document.getElementById('nextBtn');
-    const finishBtn=document.getElementById('finishBtn');
-    const music1=document.getElementById('music1');
-    const music2=document.getElementById('music2');
-    let count=0;
+    const tapButton = document.getElementById("tapButton");
+    const bgMusic = document.getElementById("bg-music");
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const page3 = document.getElementById("page3");
+    const nextBtn1 = document.getElementById("nextBtn1");
 
-    tapBtn.addEventListener('click',()=>{
-      count++;
-      const messages=["1 🎉 Yay!","2 💜 Keep going!","3 💫","4 ✨","5 😍","6 💕","7 🌸","8 🐶 Woof!","9 🐱 Meow!","10 💐 Halfway there!","11 💞","12 🌈","13 🌷","14 🦋","15 🎶","16 💝","17 🌻","18 🥰","19 🎊 You did it!"];
-      clickText.textContent=messages[count-1]||"Almost there!";
-      if(count>=19){
-        fadeOutMusic(music1);
-        setTimeout(()=>{
-          page1.classList.remove('show'); page1.classList.add('hidden');
-          page2.classList.remove('hidden'); page2.classList.add('show');
-          music2.play();
-        },1500);
+    let taps = 0;
+    tapButton.addEventListener("click", () => {
+      taps++;
+      tapButton.textContent = `Tap here 💜 (${taps}/19)`;
+      if (taps === 19) {
+        fadeOutMusic(() => {
+          page1.classList.add("hidden");
+          page2.classList.remove("hidden");
+          playNewMusic("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3");
+        });
       }
     });
 
-    nextBtn.addEventListener('click',()=>{
-      page2.classList.remove('show'); page2.classList.add('hidden');
-      page3.classList.remove('hidden'); page3.classList.add('show');
+    nextBtn1.addEventListener("click", () => {
+      fadeOutMusic(() => {
+        page2.classList.add("hidden");
+        page3.classList.remove("hidden");
+        playNewMusic("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3");
+      });
     });
 
-    finishBtn.addEventListener('click',()=>{ alert("🎂 The End — Happy Birthday!"); });
+    // Fade out background music smoothly
+    function fadeOutMusic(callback) {
+      let fade = setInterval(() => {
+        if (bgMusic.volume > 0.05) {
+          bgMusic.volume -= 0.05;
+        } else {
+          clearInterval(fade);
+          bgMusic.pause();
+          bgMusic.volume = 1;
+          callback();
+        }
+      }, 100);
+    }
 
-    function fadeOutMusic(audio){
-      const fade=setInterval(()=>{
-        if(audio.volume>0.05){ audio.volume-=0.05; }
-        else { clearInterval(fade); audio.pause(); audio.volume=1; }
-      },150);
+    // Play new background song
+    function playNewMusic(src) {
+      bgMusic.src = src;
+      bgMusic.play();
     }
   </script>
 </body>
 </html>
+
 
