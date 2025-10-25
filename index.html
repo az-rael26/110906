@@ -3,192 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday, Sheina Mae!</title>
+<title>Happy Birthday, Sheina Mae!!</title>
 <style>
   body {
     margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #c79ee6, #f9d6e4);
+    font-family: 'Poppins', sans-serif;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at top left, #f8eaff, #caa8f5);
-    overflow: hidden;
-    font-family: "Poppins", sans-serif;
-    color: #fff;
-  }
-
-  h1 {
-    font-size: 2.8rem;
-    text-shadow: 0 0 10px rgba(0,0,0,0.25);
-    animation: fadeIn 2s ease;
-  }
-
-  .gif-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 20px;
-  }
-  .gif-container img {
-    width: 220px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.4);
-  }
-
-  button {
-    background: #b57edc;
-    color: white;
-    border: none;
-    padding: 14px 32px;
-    font-size: 1.1rem;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(181,126,220,0.6);
-  }
-  button:hover {
-    background: #d8b4fe;
-    transform: scale(1.05);
-  }
-
-  /* 🌸 Soft falling petals */
-  .petal {
-    position: fixed;
-    top: -50px;
-    width: 30px;
-    height: 30px;
-    background-image: url('https://pngimg.com/uploads/pink_flower/pink_flower_PNG3407.png');
-    background-size: cover;
-    opacity: 0.85;
-    pointer-events: none;
-    animation: fall linear infinite;
-  }
-  @keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    flex-direction: column;
+    text-align: center;
   }
 
   .hidden { display: none; }
+  .fade { animation: fade 1s forwards; }
 
-  .message-page {
-    text-align: center;
-    padding: 40px;
-    max-width: 600px;
-    color: #fff;
-    animation: fadeIn 2s ease;
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  h1 {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: floatText 3s ease-in-out infinite alternate;
   }
+
+  @keyframes floatText {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-10px); }
+  }
+
+  .cake {
+    position: relative;
+    width: 120px;
+    height: 100px;
+    background: #ffb6c1;
+    border-radius: 10px 10px 5px 5px;
+    margin: 0 auto;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+
+  .candle {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 40px;
+    background: #fff8dc;
+    border-radius: 3px;
+  }
+
+  .flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(ellipse at center, #ffb300 0%, #ff6f00 70%);
+    border-radius: 50%;
+    animation: flicker 0.3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    from { transform: translateX(-50%) scale(1); opacity: 1; }
+    to { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+  }
+
+  button {
+    background: #d7b7ef;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    margin-top: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #b684e8;
+    transform: scale(1.05);
+  }
+
+  .petal {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #f6c1de 0%, #c69cf4 100%);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .heart {
+    color: #ff5ca1;
+    font-size: 3em;
+    animation: pulse 1.5s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.2); opacity: 1; }
+  }
+
+  .page { display: none; }
+  .active { display: block; }
 </style>
 </head>
 <body>
-<audio id="bg-music" autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
 
-<!-- 🎂 Page 1 -->
-<div id="page1">
-  <h1>🎂 Happy Birthday, Sheina Mae! 🎉</h1>
-  <div class="gif-container">
-    <img src="https://media.giphy.com/media/8Iv5lqKwKsZ2g/giphy.gif" alt="Shih Tzu celebrating">
-    <img src="https://media.giphy.com/media/l0ExdMHUDKteztyfe/giphy.gif" alt="Birthday cake candles">
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat celebrating">
+<div id="page1" class="page active fade">
+  <h1>🎉 Happy Birthday Sheina Mae! 🎉</h1>
+  <div class="cake">
+    <div class="candle">
+      <div class="flame" id="flame"></div>
+    </div>
   </div>
-  <button id="tapButton">Tap here 💜 (0/19)</button>
+  <button id="tapBtn">Tap here 💜</button>
 </div>
 
-<!-- 💌 Page 2 -->
-<div id="page2" class="hidden">
-  <div class="message-page">
-    <h2>💌 Message Page 1</h2>
-    <p>Placeholder message here — write something sweet for Sheina Mae! 💜</p>
-    <button id="nextBtn1">Next 💕</button>
-  </div>
+<div id="page2" class="page fade">
+  <h1>Your first message here 💌</h1>
+  <div class="heart">💖</div>
+  <button id="nextBtn">Next 💕</button>
 </div>
 
-<!-- 🌟 Page 3 -->
-<div id="page3" class="hidden">
-  <div class="message-page">
-    <h2>💫 Message Page 2</h2>
-    <p>Another placeholder message — maybe something heartfelt or funny! 🎁</p>
-    <button id="restartBtn">Restart 💫</button>
-  </div>
+<div id="page3" class="page fade">
+  <h1>Your second message here 🌷</h1>
+  <button id="restartBtn">Restart 🔁</button>
 </div>
 
 <script>
-  // 🌸 Create softly drifting petals
-  for (let i = 0; i < 20; i++) {
-    let petal = document.createElement("div");
-    petal.classList.add("petal");
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = 10 + Math.random() * 6 + "s";
-    petal.style.animationDelay = Math.random() * 5 + "s";
-    petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-    document.body.appendChild(petal);
+let tapCount = 0;
+const tapBtn = document.getElementById('tapBtn');
+const flame = document.getElementById('flame');
+const pages = [document.getElementById('page1'), document.getElementById('page2'), document.getElementById('page3')];
+
+function showPage(index) {
+  pages.forEach(p => p.classList.remove('active'));
+  pages[index].classList.add('active');
+}
+
+tapBtn.addEventListener('click', () => {
+  tapCount++;
+  if (tapCount >= 19) {
+    flame.style.animation = 'fadeOut 1s forwards';
+    flame.style.opacity = '0';
+    setTimeout(() => showPage(1), 1500);
   }
+});
 
-  const tapButton = document.getElementById("tapButton");
-  const bgMusic = document.getElementById("bg-music");
-  const page1 = document.getElementById("page1");
-  const page2 = document.getElementById("page2");
-  const page3 = document.getElementById("page3");
-  const nextBtn1 = document.getElementById("nextBtn1");
-  const restartBtn = document.getElementById("restartBtn");
+document.getElementById('nextBtn').addEventListener('click', () => showPage(2));
+document.getElementById('restartBtn').addEventListener('click', () => {
+  tapCount = 0;
+  flame.style.opacity = '1';
+  showPage(0);
+});
 
-  let taps = 0;
-  tapButton.addEventListener("click", () => {
-    taps++;
-    tapButton.textContent = `Tap here 💜 (${taps}/19)`;
-    if (taps === 19) {
-      fadeOutMusic(() => {
-        page1.classList.add("hidden");
-        page2.classList.remove("hidden");
-        playNewMusic("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3");
-      });
-    }
-  });
-
-  nextBtn1.addEventListener("click", () => {
-    fadeOutMusic(() => {
-      page2.classList.add("hidden");
-      page3.classList.remove("hidden");
-      playNewMusic("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3");
-    });
-  });
-
-  restartBtn.addEventListener("click", () => {
-    fadeOutMusic(() => {
-      page3.classList.add("hidden");
-      page1.classList.remove("hidden");
-      taps = 0;
-      tapButton.textContent = `Tap here 💜 (0/19)`;
-      playNewMusic("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
-    });
-  });
-
-  function fadeOutMusic(callback) {
-    let fade = setInterval(() => {
-      if (bgMusic.volume > 0.05) {
-        bgMusic.volume -= 0.05;
-      } else {
-        clearInterval(fade);
-        bgMusic.pause();
-        bgMusic.volume = 1;
-        callback();
-      }
-    }, 100);
-  }
-
-  function playNewMusic(src) {
-    bgMusic.src = src;
-    bgMusic.play();
-  }
+// Petal Animation
+function createPetal() {
+  const petal = document.createElement('div');
+  petal.classList.add('petal');
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = 6 + Math.random() * 5 + 's';
+  document.body.appendChild(petal);
+  setTimeout(() => petal.remove(), 11000);
+}
+setInterval(createPetal, 250);
 </script>
+
 </body>
 </html>
 
