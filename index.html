@@ -3,71 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday, Sheina Mae!!</title>
+<title>Happy Birthday Sheina Mae</title>
 <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    margin: 0;
-    overflow: hidden;
-    background: linear-gradient(to bottom right, #c79ee6, #f9d6e4);
-    font-family: 'Poppins', sans-serif;
     height: 100vh;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #c79ee6, #f9d6e4);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    color: white;
     text-align: center;
   }
 
-  .hidden { display: none; }
-  .fade { animation: fade 1s forwards; }
-
-  @keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
   h1 {
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     font-size: 2.5em;
     margin-bottom: 20px;
-    animation: floatText 3s ease-in-out infinite alternate;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    animation: fadeIn 2s ease;
   }
 
-  @keyframes floatText {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-10px); }
+  button {
+    background: #d7b7ef;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
   }
 
-  .cake {
-    position: relative;
-    width: 120px;
-    height: 100px;
-    background: #ffb6c1;
-    border-radius: 10px 10px 5px 5px;
-    margin: 0 auto;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  button:hover { background: #b78be8; transform: scale(1.05); }
+
+  .page { display: none; opacity: 0; transition: opacity 1s; }
+  .active { display: flex; flex-direction: column; opacity: 1; }
+
+  .candles {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
   }
 
   .candle {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 10px;
     height: 40px;
-    background: #fff8dc;
-    border-radius: 3px;
+    background: #fff1d6;
+    position: relative;
+    border-radius: 2px;
   }
 
   .flame {
     position: absolute;
-    top: -20px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 15px;
+    width: 10px;
     height: 15px;
-    background: radial-gradient(ellipse at center, #ffb300 0%, #ff6f00 70%);
+    background: radial-gradient(ellipse at center, #ffb300 0%, #ff6f00 80%);
     border-radius: 50%;
     animation: flicker 0.3s infinite alternate;
   }
@@ -77,28 +79,15 @@
     to { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
   }
 
-  button {
-    background: #d7b7ef;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 1.2em;
-    margin-top: 25px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background: #b684e8;
-    transform: scale(1.05);
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .petal {
     position: fixed;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: radial-gradient(circle, #f6c1de 0%, #c69cf4 100%);
     border-radius: 50%;
     opacity: 0.8;
@@ -107,74 +96,97 @@
   }
 
   @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(720deg);
-      opacity: 0;
-    }
+    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) translateX(20vw) rotate(360deg); opacity: 0; }
   }
 
-  .heart {
-    color: #ff5ca1;
-    font-size: 3em;
-    animation: pulse 1.5s infinite alternate;
+  .message {
+    max-width: 80%;
+    line-height: 1.5em;
+    font-size: 1.3em;
+    animation: fadeIn 2s ease;
   }
 
-  @keyframes pulse {
-    from { transform: scale(1); opacity: 0.8; }
-    to { transform: scale(1.2); opacity: 1; }
+  .next-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #b88ee5;
+    padding: 10px 22px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   }
 
-  .page { display: none; }
-  .active { display: block; }
+  .next-btn:hover { background: #a674e5; }
 </style>
 </head>
 <body>
 
-<div id="page1" class="page active fade">
-  <h1>🎉 Happy Birthday Sheina Mae! 🎉</h1>
-  <div class="cake">
-    <div class="candle">
-      <div class="flame" id="flame"></div>
-    </div>
-  </div>
-  <button id="tapBtn">Tap here 💜</button>
+<!-- Page 1 -->
+<div id="page1" class="page active">
+  <h1>Happy Birthday Sheina Mae!</h1>
+  <div class="candles" id="candles"></div>
+  <button id="tapBtn">Tap me</button>
 </div>
 
-<div id="page2" class="page fade">
-  <h1>Your first message here 💌</h1>
-  <div class="heart">💖</div>
-  <button id="nextBtn">Next 💕</button>
+<!-- Page 2 -->
+<div id="page2" class="page">
+  <div class="message">Your first message goes here... 💌</div>
+  <button class="next-btn" id="nextBtn">Next</button>
 </div>
 
-<div id="page3" class="page fade">
-  <h1>Your second message here 🌷</h1>
-  <button id="restartBtn">Restart 🔁</button>
+<!-- Page 3 -->
+<div id="page3" class="page">
+  <div class="message">Your second message goes here... 🌷</div>
 </div>
 
 <script>
 let tapCount = 0;
 const tapBtn = document.getElementById('tapBtn');
-const flame = document.getElementById('flame');
-const pages = [document.getElementById('page1'), document.getElementById('page2'), document.getElementById('page3')];
+const candleContainer = document.getElementById('candles');
+const pages = [
+  document.getElementById('page1'),
+  document.getElementById('page2'),
+  document.getElementById('page3')
+];
 
 function showPage(index) {
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
 }
 
+// Add candles on each tap
 tapBtn.addEventListener('click', () => {
   tapCount++;
-  if (tapCount >= 19) {
-    flame.style.animation = 'fadeOut 1s forwards';
-    flame.style.opacity = '0';
-    setTimeout(() => showPage(1), 1500);
+  if (tapCount <= 19) {
+    const candle = document.createElement('div');
+    candle.classList.add('candle');
+    const flame = document.createElement('div');
+    flame.classList.add('flame');
+    candle.appendChild(flame);
+    candleContainer.appendChild(candle);
+  }
+  if (tapCount === 19) {
+    // Blow out candles
+    const flames = document.querySelectorAll('.flame');
+    flames.forEach(f => {
+      f.style.animation = 'none';
+      f.style.transition = 'opacity 1s';
+      setTimeout(() => (f.style.opacity = '0'), 200);
+    });
+    // Transition to next page
+    setTimeout(() => showPage(1), 2000);
   }
 });
 
 document.getElementById('nextBtn').addEventListener('click', () => showPage(2));
-document.getElementById('restartBtn').addEventListener('click', () => {
+document.getElementById('page3').addEventListener('click', () => {
   tapCount = 0;
-  flame.style.opacity = '1';
+  candleContainer.innerHTML = '';
   showPage(0);
 });
 
@@ -187,9 +199,8 @@ function createPetal() {
   document.body.appendChild(petal);
   setTimeout(() => petal.remove(), 11000);
 }
-setInterval(createPetal, 250);
+setInterval(createPetal, 300);
 </script>
 
 </body>
 </html>
-
