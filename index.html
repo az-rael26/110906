@@ -17,6 +17,7 @@
     flex-direction: column;
     color: white;
     text-align: center;
+    position: relative;
   }
 
   h1 {
@@ -24,6 +25,8 @@
     margin-bottom: 20px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
     animation: fadeIn 2s ease;
+    z-index: 2;
+    position: relative;
   }
 
   button {
@@ -37,6 +40,8 @@
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: 0.3s;
+    z-index: 2;
+    position: relative;
   }
 
   button:hover { background: #b78be8; transform: scale(1.05); }
@@ -47,36 +52,39 @@
   .candles {
     position: absolute;
     bottom: 80px;
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
   }
 
   .candle {
-    width: 10px;
-    height: 40px;
-    background: #fff1d6;
-    position: relative;
-    border-radius: 2px;
+    position: absolute;
+    border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(to top, #f3c6a1, #ffe8c2);
+    display: inline-block;
   }
 
   .flame {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 10px;
-    height: 15px;
-    background: radial-gradient(ellipse at center, #ffb300 0%, #ff6f00 80%);
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse at center, #ffea00 0%, #ff6f00 70%);
     border-radius: 50%;
-    animation: flicker 0.3s infinite alternate;
+    opacity: 0;
+    animation: flicker 0.4s infinite alternate;
+    transition: opacity 1s, transform 1s;
   }
 
   @keyframes flicker {
-    from { transform: translateX(-50%) scale(1); opacity: 1; }
-    to { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+    0% { transform: translateX(-50%) scale(1); opacity: 1; }
+    50% { transform: translateX(-50%) scale(1.1); opacity: 0.9; }
+    100% { transform: translateX(-50%) scale(0.95); opacity: 1; }
   }
 
   @keyframes fadeIn {
@@ -84,27 +92,13 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .petal {
-    position: fixed;
-    width: 15px;
-    height: 15px;
-    background: radial-gradient(circle, #f6c1de 0%, #c69cf4 100%);
-    border-radius: 50%;
-    opacity: 0.8;
-    pointer-events: none;
-    animation: fall linear forwards;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) translateX(20vw) rotate(360deg); opacity: 0; }
-  }
-
   .message {
     max-width: 80%;
     line-height: 1.5em;
     font-size: 1.3em;
     animation: fadeIn 2s ease;
+    z-index: 2;
+    position: relative;
   }
 
   .next-btn {
@@ -119,87 +113,191 @@
     font-size: 1em;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 2;
   }
 
   .next-btn:hover { background: #a674e5; }
+
+  .star, .confetti {
+    position: fixed;
+    top: -20px;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Star shape */
+  .star {
+    background: yellow;
+    clip-path: polygon(
+      50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+      50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px #ffeb3b);
+  }
+
+  /* Confetti shape */
+  .confetti {
+    opacity: 0.9;
+  }
 </style>
 </head>
 <body>
 
-<!-- Page 1 -->
 <div id="page1" class="page active">
   <h1>Happy Birthday Sheina Mae!</h1>
   <div class="candles" id="candles"></div>
   <button id="tapBtn">Tap me</button>
 </div>
 
-<!-- Page 2 -->
 <div id="page2" class="page">
   <div class="message">Your first message goes here... 💌</div>
   <button class="next-btn" id="nextBtn">Next</button>
 </div>
 
-<!-- Page 3 -->
 <div id="page3" class="page">
   <div class="message">Your second message goes here... 🌷</div>
 </div>
 
 <script>
-let tapCount = 0;
-const tapBtn = document.getElementById('tapBtn');
-const candleContainer = document.getElementById('candles');
+// Pages
 const pages = [
   document.getElementById('page1'),
   document.getElementById('page2'),
   document.getElementById('page3')
 ];
-
 function showPage(index) {
   pages.forEach(p => p.classList.remove('active'));
   pages[index].classList.add('active');
 }
 
-// Add candles on each tap
+// Candles
+const tapBtn = document.getElementById('tapBtn');
+const candleContainer = document.getElementById('candles');
+let tapCount = 0;
+const maxCandles = 19;
+
 tapBtn.addEventListener('click', () => {
-  tapCount++;
-  if (tapCount <= 19) {
+  if (tapCount < maxCandles) {
+    tapCount++;
+
     const candle = document.createElement('div');
     candle.classList.add('candle');
+
+    const width = 12 + Math.random() * 4;
+    const height = 30 + Math.random() * 20;
+    candle.style.width = width + 'px';
+    candle.style.height = height + 'px';
+    candle.style.bottom = '80px';
+    candle.style.position = 'absolute';
+    candle.style.transform = 'translateX(0) scale(0)';
+
     const flame = document.createElement('div');
     flame.classList.add('flame');
     candle.appendChild(flame);
     candleContainer.appendChild(candle);
-  }
-  if (tapCount === 19) {
-    // Blow out candles
+
+    // Neatly spaced
+    const spacing = 8;
+    const totalWidth = maxCandles*(width+spacing);
+    const startX = -totalWidth/2 + (tapCount-1)*(width+spacing) + width/2;
+
+    const offsetY = (Math.random()-0.5)*10;
+    const rotation = (Math.random()-0.5)*10;
+    setTimeout(()=>{
+      candle.style.transition = 'transform 0.5s ease';
+      candle.style.transform = `translate(${startX}px, ${offsetY}px) rotate(${rotation}deg) scale(1)`;
+      flame.style.opacity = '1';
+    },50);
+
+  } else if (tapCount === maxCandles) {
+    // 20th tap = blow out
+    tapCount++;
     const flames = document.querySelectorAll('.flame');
-    flames.forEach(f => {
-      f.style.animation = 'none';
-      f.style.transition = 'opacity 1s';
-      setTimeout(() => (f.style.opacity = '0'), 200);
+    flames.forEach(f=>{
+      f.style.transition='opacity 1s, transform 1s';
+      f.style.transform='translateX(-50%) scale(0)';
+      f.style.opacity='0';
     });
-    // Transition to next page
-    setTimeout(() => showPage(1), 2000);
+  } else if(tapCount === maxCandles+1){
+    showPage(1); // go to page 2
   }
 });
 
-document.getElementById('nextBtn').addEventListener('click', () => showPage(2));
-document.getElementById('page3').addEventListener('click', () => {
-  tapCount = 0;
-  candleContainer.innerHTML = '';
+// Page navigation
+document.getElementById('nextBtn').addEventListener('click',()=>showPage(2));
+document.getElementById('page3').addEventListener('click',()=>{
+  tapCount=0;
+  candleContainer.innerHTML='';
   showPage(0);
 });
 
-// Petal Animation
-function createPetal() {
-  const petal = document.createElement('div');
-  petal.classList.add('petal');
-  petal.style.left = Math.random() * 100 + 'vw';
-  petal.style.animationDuration = 6 + Math.random() * 5 + 's';
-  document.body.appendChild(petal);
-  setTimeout(() => petal.remove(), 11000);
+// Stars for page 1
+function createStar(){
+  if(!pages[0].classList.contains('active')) return;
+  const star = document.createElement('div');
+  star.classList.add('star');
+
+  const size = 6 + Math.random()*10;
+  star.style.width = size+'px';
+  star.style.height = size+'px';
+  star.style.left = Math.random()*(window.innerWidth-size)+'px';
+
+  const duration = 4000+Math.random()*4000;
+  let startTime = null;
+  const sway=20;
+  const rotSpeed=(Math.random()*2-1)*0.1;
+
+  function animateStar(t){
+    if(!startTime) startTime=t;
+    const elapsed=t-startTime;
+    const y=(elapsed/duration)*(window.innerHeight+40);
+    const xOffset=Math.sin(elapsed/500)*sway;
+    const rotation=elapsed*rotSpeed;
+    star.style.transform=`translate(${xOffset}px, ${y}px) rotate(${rotation}rad)`;
+    if(y<window.innerHeight+40) requestAnimationFrame(animateStar);
+    else star.remove();
+  }
+  requestAnimationFrame(animateStar);
+  document.body.appendChild(star);
 }
-setInterval(createPetal, 300);
+setInterval(createStar,200);
+
+// Confetti for page 2 and 3
+function createConfetti(){
+  if(!pages[1].classList.contains('active') && !pages[2].classList.contains('active')) return;
+  const confetti=document.createElement('div');
+  confetti.classList.add('confetti');
+
+  const sizeW=5+Math.random()*10;
+  const sizeH=8+Math.random()*12;
+  confetti.style.width=sizeW+'px';
+  confetti.style.height=sizeH+'px';
+  confetti.style.background=['#f94144','#f3722c','#f9c74f','#90be6d','#577590','#f8961e','#43aa8b'][Math.floor(Math.random()*7)];
+  confetti.style.left=Math.random()*window.innerWidth+'px';
+  confetti.style.top='-10px';
+  confetti.style.opacity=0.9;
+  confetti.style.transform=`rotate(${Math.random()*360}deg)`;
+
+  const duration=3000+Math.random()*2000;
+  const sway=20+Math.random()*20;
+  let startTime=null;
+
+  function animateConfetti(t){
+    if(!startTime) startTime=t;
+    const elapsed=t-startTime;
+    const y=(elapsed/duration)*(window.innerHeight+20);
+    const xOffset=Math.sin(elapsed/300)*sway;
+    const rotation=elapsed*0.01*(Math.random()*2-1);
+    confetti.style.transform=`translate(${xOffset}px, ${y}px) rotate(${rotation}rad)`;
+    if(y<window.innerHeight+20) requestAnimationFrame(animateConfetti);
+    else confetti.remove();
+  }
+  requestAnimationFrame(animateConfetti);
+  document.body.appendChild(confetti);
+}
+setInterval(createConfetti,100);
 </script>
 
 </body>
