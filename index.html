@@ -31,7 +31,7 @@
     animation: fadeIn 2s ease;
     z-index: 2;
     position: relative;
-    font-family: 'Chewy', cursive; /* Chewy font */
+    font-family: 'Chewy', cursive;
   }
 
   .encourage {
@@ -62,21 +62,21 @@
   .active { display: flex; flex-direction: column; opacity: 1; }
 
   .candles {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    height: auto;
-    z-index: 2;
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
     pointer-events: none;
   }
 
   .candle {
-    position: absolute;
+    position: relative;
     border-radius: 4px 4px 2px 2px;
     background: linear-gradient(to top, #f3c6a1, #ffe8c2);
     display: inline-block;
+    transform: scale(0);
+    transition: transform 0.5s ease;
   }
 
   .flame {
@@ -88,7 +88,6 @@
     height: 20px;
     background: radial-gradient(ellipse at center, #ffea00 0%, #ff6f00 70%);
     border-radius: 50%;
-    opacity: 1;
     animation: flicker 0.4s infinite alternate;
   }
 
@@ -157,8 +156,8 @@
 <div id="page1" class="page active">
   <h1>Happy Birthday Sheina Mae!</h1>
   <div class="encourage" id="encourage"></div>
-  <div class="candles" id="candles"></div>
   <button id="tapBtn">Tap me</button>
+  <div class="candles" id="candles"></div>
 </div>
 
 <div id="page2" class="page">
@@ -192,25 +191,12 @@ const maxCandles = 19;
 
 // Encouraging messages
 const messages = [
-  "You're doing amazing! 🌟",
-  "Keep going! 💖",
-  "Look at those candles shine! ",
-  "You're lighting up the day! ",
-  "Malayo pa mami ",
-  "Almost there!😆 ",
-  "Madaming taps paaa ",
-  "Wow, it's getting bright! ",
-  "You're awesome! ",
-  "Candles are rising! 🔥",
-  "Amazing! Keep tapping! 🎉",
-  "Tap more! ",
-  "Pang-ilan na ba?🤔 ",
-  "Look at this glow! ",
-  "Fantastic!",
-  "Keep going, beautiful 😘",
-  "Malapit na beh ",
-  "Love it! ",
-  "Yeyy🥳! "
+  "Tap! Tap!", "Keep going! 💖", "You're doing amazing!",
+  "You're lighting up the day! ✨", "Malapit na mami😆", "Dami na candless",
+  "Pang-ilan na ba?", "Tap more!!", "Candles are rising! 🔥",
+  "Amazing! Keep tapping! 🎉", "Almost there!💖", "Keep shining! ✨",
+  "Love it! ❤️", "Lapit naaa", "Fantastic! 😍", "Konti nalangg",
+  "Keep going! 💛", "One more tap!", "Yey!🥳"
 ];
 
 tapBtn.addEventListener('click', () => {
@@ -224,28 +210,26 @@ tapBtn.addEventListener('click', () => {
     const height = 30 + Math.random()*20;
     candle.style.width = width+'px';
     candle.style.height = height+'px';
-    candle.style.bottom = '80px';
-    candle.style.position = 'absolute';
-    candle.style.transform = 'scale(0)';
 
     const flame = document.createElement('div');
     flame.classList.add('flame');
     candle.appendChild(flame);
-    candleContainer.appendChild(candle);
 
-    // Calculate neat positions
-    const spacing = 6;
-    const totalWidth = maxCandles*(width+spacing);
-    const startX = -totalWidth/2 + (tapCount-1)*(width+spacing) + width/2;
-    const offsetY = (Math.random()-0.5)*8;
+    // Spread candles alternately left/right from center
+    if(tapCount % 2 === 0){
+      candleContainer.appendChild(candle);
+    } else {
+      candleContainer.prepend(candle);
+    }
+
+    // Slight rotation & vertical offset
     const rotation = (Math.random()-0.5)*10;
-
+    const offsetY = (Math.random()-0.5)*6;
     setTimeout(()=>{
-      candle.style.transition='transform 0.5s ease';
-      candle.style.transform = `translate(${startX}px, ${offsetY}px) rotate(${rotation}deg) scale(1)`;
+      candle.style.transform = `translateY(${offsetY}px) rotate(${rotation}deg) scale(1)`;
     },50);
 
-    // Show encouraging message
+    // Encouraging message
     encourageText.textContent = messages[tapCount-1];
 
   } else if(tapCount === maxCandles){
@@ -333,4 +317,5 @@ setInterval(createConfetti,100);
 
 </body>
 </html>
+
 
