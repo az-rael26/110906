@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Sheina Mae</title>
+
+<!-- Google Font Chewy -->
+<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -21,12 +25,20 @@
   }
 
   h1 {
-    font-size: 2.5em;
+    font-size: 2.8em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
     animation: fadeIn 2s ease;
     z-index: 2;
     position: relative;
+    font-family: 'Chewy', cursive; /* Chewy font */
+  }
+
+  .encourage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    animation: fadeIn 1s ease;
+    min-height: 1.5em;
   }
 
   button {
@@ -144,6 +156,7 @@
 
 <div id="page1" class="page active">
   <h1>Happy Birthday Sheina Mae!</h1>
+  <div class="encourage" id="encourage"></div>
   <div class="candles" id="candles"></div>
   <button id="tapBtn">Tap me</button>
 </div>
@@ -172,8 +185,33 @@ function showPage(index) {
 // Candles
 const tapBtn = document.getElementById('tapBtn');
 const candleContainer = document.getElementById('candles');
+const encourageText = document.getElementById('encourage');
+
 let tapCount = 0;
 const maxCandles = 19;
+
+// Encouraging messages
+const messages = [
+  "You're doing amazing! 🌟",
+  "Keep going! 💖",
+  "Look at those candles shine! 🕯️",
+  "You're lighting up the day! ✨",
+  "Such a beautiful cake! 🎂",
+  "Almost there! 😄",
+  "Keep the magic alive! 🪄",
+  "Wow, it's getting bright! 🌟",
+  "You're awesome! 💫",
+  "Candles are rising! 🔥",
+  "Amazing! Keep tapping! 🎉",
+  "You rock! 🤩",
+  "Such energy! ⚡",
+  "Look at this glow! 💛",
+  "Fantastic! 😍",
+  "So magical! 🧚",
+  "Keep shining! ✨",
+  "Love it! ❤️",
+  "Almost done! 🌈"
+];
 
 tapBtn.addEventListener('click', () => {
   if(tapCount < maxCandles){
@@ -207,6 +245,9 @@ tapBtn.addEventListener('click', () => {
       candle.style.transform = `translate(${startX}px, ${offsetY}px) rotate(${rotation}deg) scale(1)`;
     },50);
 
+    // Show encouraging message
+    encourageText.textContent = messages[tapCount-1];
+
   } else if(tapCount === maxCandles){
     // 20th tap: go to next page
     tapCount++;
@@ -219,6 +260,7 @@ document.getElementById('nextBtn').addEventListener('click',()=>showPage(2));
 document.getElementById('page3').addEventListener('click',()=>{
   tapCount=0;
   candleContainer.innerHTML='';
+  encourageText.textContent='';
   showPage(0);
 });
 
