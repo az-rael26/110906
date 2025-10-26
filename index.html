@@ -76,9 +76,8 @@
     height: 20px;
     background: radial-gradient(ellipse at center, #ffea00 0%, #ff6f00 70%);
     border-radius: 50%;
-    opacity: 0;
+    opacity: 1;
     animation: flicker 0.4s infinite alternate;
-    transition: opacity 1s, transform 1s;
   }
 
   @keyframes flicker {
@@ -126,7 +125,6 @@
     z-index: 1;
   }
 
-  /* Star shape */
   .star {
     background: yellow;
     clip-path: polygon(
@@ -137,7 +135,6 @@
     filter: drop-shadow(0 0 6px #ffeb3b);
   }
 
-  /* Confetti shape */
   .confetti {
     opacity: 0.9;
   }
@@ -179,49 +176,41 @@ let tapCount = 0;
 const maxCandles = 19;
 
 tapBtn.addEventListener('click', () => {
-  if (tapCount < maxCandles) {
+  if(tapCount < maxCandles){
     tapCount++;
 
     const candle = document.createElement('div');
     candle.classList.add('candle');
 
-    const width = 12 + Math.random() * 4;
-    const height = 30 + Math.random() * 20;
-    candle.style.width = width + 'px';
-    candle.style.height = height + 'px';
+    const width = 12 + Math.random()*4;
+    const height = 30 + Math.random()*20;
+    candle.style.width = width+'px';
+    candle.style.height = height+'px';
     candle.style.bottom = '80px';
     candle.style.position = 'absolute';
-    candle.style.transform = 'translateX(0) scale(0)';
+    candle.style.transform = 'scale(0)';
 
     const flame = document.createElement('div');
     flame.classList.add('flame');
     candle.appendChild(flame);
     candleContainer.appendChild(candle);
 
-    // Neatly spaced
-    const spacing = 8;
+    // Calculate neat positions
+    const spacing = 6;
     const totalWidth = maxCandles*(width+spacing);
     const startX = -totalWidth/2 + (tapCount-1)*(width+spacing) + width/2;
-
-    const offsetY = (Math.random()-0.5)*10;
+    const offsetY = (Math.random()-0.5)*8;
     const rotation = (Math.random()-0.5)*10;
+
     setTimeout(()=>{
-      candle.style.transition = 'transform 0.5s ease';
+      candle.style.transition='transform 0.5s ease';
       candle.style.transform = `translate(${startX}px, ${offsetY}px) rotate(${rotation}deg) scale(1)`;
-      flame.style.opacity = '1';
     },50);
 
-  } else if (tapCount === maxCandles) {
-    // 20th tap = blow out
+  } else if(tapCount === maxCandles){
+    // 20th tap: go to next page
     tapCount++;
-    const flames = document.querySelectorAll('.flame');
-    flames.forEach(f=>{
-      f.style.transition='opacity 1s, transform 1s';
-      f.style.transform='translateX(-50%) scale(0)';
-      f.style.opacity='0';
-    });
-  } else if(tapCount === maxCandles+1){
-    showPage(1); // go to page 2
+    showPage(1);
   }
 });
 
@@ -264,7 +253,7 @@ function createStar(){
 }
 setInterval(createStar,200);
 
-// Confetti for page 2 and 3
+// Confetti for page 2 & 3
 function createConfetti(){
   if(!pages[1].classList.contains('active') && !pages[2].classList.contains('active')) return;
   const confetti=document.createElement('div');
