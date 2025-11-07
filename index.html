@@ -115,10 +115,10 @@
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 40px 60px;        /* generous inner space */
-  width: 90%;                /* wider box */
-  max-width: 1000px;         /* very wide limit for big screens */
-  text-align: justify;       /* clean left-right alignment */
+  padding: 40px 60px;        /* space inside the box */
+  width: 90%;                /* overall box width */
+  max-width: 1000px;         /* keeps it nice on wide screens */
+  text-align: justify;       /* evenly aligned text */
   margin: 0 auto;
   position: absolute;
   top: 50%;
@@ -126,9 +126,9 @@
   transform: translate(-50%, -50%);
   backdrop-filter: blur(6px);
   animation: fadeInUp 1.5s ease;
-  height: auto;              /* expands with text */
-  max-height: none;          /* no scroll restriction */
+  height: auto;              /* expands with text length */
 }
+
 
 
   @keyframes fadeInUp {
