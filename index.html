@@ -107,24 +107,27 @@
     position: relative;
   }
 
-  /* Clean and simple style — no glow or shimmer */
- .fancy-message {
+/* Clean and simple style — improved readability */
+.fancy-message {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.3em;
-  line-height: 1.4em;     /* tighter spacing */
+  font-size: 1.2em;
+  line-height: 1.5em;
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 25px 35px;     /* space inside box */
-  max-width: 90%;
-  margin: 0 auto;         /* horizontally center */
-  text-align: center;
+  padding: 40px 50px;        /* adds internal space */
+  width: 85%;                /* wider box */
+  max-width: 900px;          /* limits width for large screens */
+  text-align: justify;       /* evenly aligns text left/right */
+  margin: 0 auto;
   position: absolute;
-  top: 50%;               /* vertical center start */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* perfectly center it */
-  backdrop-filter: blur(5px);
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(6px);
   animation: fadeInUp 1.5s ease;
+  overflow-y: auto;          /* allows scroll if text is longer */
+  max-height: 80vh;          /* ensures it fits vertically */
 }
 
   @keyframes fadeInUp {
