@@ -115,10 +115,10 @@
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 40px 50px;        /* adds internal space */
-  width: 85%;                /* wider box */
-  max-width: 900px;          /* limits width for large screens */
-  text-align: justify;       /* evenly aligns text left/right */
+  padding: 40px 60px;        /* generous inner space */
+  width: 90%;                /* wider box */
+  max-width: 1000px;         /* very wide limit for big screens */
+  text-align: justify;       /* clean left-right alignment */
   margin: 0 auto;
   position: absolute;
   top: 50%;
@@ -126,9 +126,10 @@
   transform: translate(-50%, -50%);
   backdrop-filter: blur(6px);
   animation: fadeInUp 1.5s ease;
-  overflow-y: auto;          /* allows scroll if text is longer */
-  max-height: 80vh;          /* ensures it fits vertically */
+  height: auto;              /* expands with text */
+  max-height: none;          /* no scroll restriction */
 }
+
 
   @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(20px); }
