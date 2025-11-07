@@ -111,6 +111,32 @@
     position: relative;
   }
 
+  /* ✨ Glowing message style for Page 2 */
+  .fancy-message {
+    font-family: 'Chewy', cursive;
+    font-size: 1.5em;
+    line-height: 1.6em;
+    color: #fff5fd;
+    text-shadow: 0 0 8px #ffb6e6, 0 0 15px #ffa6f5;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px 25px;
+    margin: 20px auto;
+    max-width: 85%;
+    backdrop-filter: blur(4px);
+    animation: fadeInUp 1.5s ease, glowPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes glowPulse {
+    from { text-shadow: 0 0 8px #ffb6e6, 0 0 15px #ffa6f5; }
+    to { text-shadow: 0 0 15px #ffb6e6, 0 0 30px #ff69b4; }
+  }
+
   .next-btn {
     position: fixed;
     bottom: 20px;
@@ -160,11 +186,15 @@
   <div class="candles" id="candles"></div>
 </div>
 
+<!-- 🌸 Page 2 with glowing message -->
 <div id="page2" class="page">
-  <div class="message">Happiest birthday to the one who has my heart in ways I can’t fully explain. You have this way of talking about things that leaves me amazed every time because its always new, may it be perspective in life or just facts that im not aware of. 
-   I’m truly grateful for all the warmth and happiness you bring in my life. Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and i know im very bad at it. 
-   2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but im always proud of how youre still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. 
-   You've etched a mark on me, na kapag nagshe share ka ng hardships mo gusto ko nalang magwala kasi bat ka nila ginaganon?! haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.  </div>
+  <div class="message fancy-message">
+    Happiest birthday to the one who has my heart in ways I can’t fully explain. 💖<br><br>
+    You have this way of talking about things that leaves me amazed every time because it’s always new — whether it's perspective in life or just facts I never knew.<br><br>
+    I’m truly grateful for all the warmth and happiness you bring into my life. Life’s been tough lately, and I know there are times you wish comfort wasn’t just through words. I wish I could be there to give it in person. 🥺<br><br>
+    2025 has been full of challenges, but I’m proud of how you continue to persevere amidst the fierce waves. I may not always say it, but I’m always proud of you — your strength, your heart, and how you still find light in dark times. 🌙<br><br>
+    You don’t deserve the pain, but you’ve handled it like no one else could. Lord, awat na po sa strongest soldier na ’yan.  
+  </div>
   <button class="next-btn" id="nextBtn">Next</button>
 </div>
 
@@ -173,7 +203,6 @@
 </div>
 
 <script>
-// Pages
 const pages = [
   document.getElementById('page1'),
   document.getElementById('page2'),
@@ -184,7 +213,6 @@ function showPage(index) {
   pages[index].classList.add('active');
 }
 
-// Candles
 const tapBtn = document.getElementById('tapBtn');
 const candleContainer = document.getElementById('candles');
 const encourageText = document.getElementById('encourage');
@@ -192,7 +220,6 @@ const encourageText = document.getElementById('encourage');
 let tapCount = 0;
 const maxCandles = 19;
 
-// Encouraging messages
 const messages = [
   "Tap! Tap!", "Keep going! 💖", "You're doing amazing!",
   "You're lighting up the day! ✨", "Malapit na mami😆", "Dami na candless",
@@ -218,31 +245,26 @@ tapBtn.addEventListener('click', () => {
     flame.classList.add('flame');
     candle.appendChild(flame);
 
-    // Spread candles alternately left/right from center
     if(tapCount % 2 === 0){
       candleContainer.appendChild(candle);
     } else {
       candleContainer.prepend(candle);
     }
 
-    // Slight rotation & vertical offset
     const rotation = (Math.random()-0.5)*10;
     const offsetY = (Math.random()-0.5)*6;
     setTimeout(()=>{
       candle.style.transform = `translateY(${offsetY}px) rotate(${rotation}deg) scale(1)`;
     },50);
 
-    // Encouraging message
     encourageText.textContent = messages[tapCount-1];
 
   } else if(tapCount === maxCandles){
-    // 20th tap: go to next page
     tapCount++;
     showPage(1);
   }
 });
 
-// Page navigation
 document.getElementById('nextBtn').addEventListener('click',()=>showPage(2));
 document.getElementById('page3').addEventListener('click',()=>{
   tapCount=0;
@@ -251,7 +273,6 @@ document.getElementById('page3').addEventListener('click',()=>{
   showPage(0);
 });
 
-// Stars for page 1
 function createStar(){
   if(!pages[0].classList.contains('active')) return;
   const star = document.createElement('div');
@@ -282,7 +303,6 @@ function createStar(){
 }
 setInterval(createStar,200);
 
-// Confetti for page 2 & 3
 function createConfetti(){
   if(!pages[1].classList.contains('active') && !pages[2].classList.contains('active')) return;
   const confetti=document.createElement('div');
@@ -317,8 +337,5 @@ function createConfetti(){
 }
 setInterval(createConfetti,100);
 </script>
-
 </body>
 </html>
-
-
