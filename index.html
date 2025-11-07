@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Sheina Mae</title>
+<title>Happy Birthday Sheina Mae!!</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -28,7 +27,6 @@
     font-size: 2.8em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    animation: fadeIn 2s ease;
     z-index: 2;
     position: relative;
   }
@@ -36,7 +34,6 @@
   .encourage {
     margin-top: 15px;
     font-size: 1.2em;
-    animation: fadeIn 1s ease;
     min-height: 1.5em;
   }
 
@@ -57,7 +54,7 @@
 
   button:hover { background: #b78be8; transform: scale(1.05); }
 
-  .page { display: none; opacity: 0; transition: opacity 1s; }
+  .page { display: none; opacity: 0; }
   .active { display: flex; flex-direction: column; opacity: 1; }
 
   .candles {
@@ -96,11 +93,6 @@
     100% { transform: translateX(-50%) scale(0.95); opacity: 1; }
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   .fancy-message {
     font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
@@ -118,7 +110,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     backdrop-filter: blur(6px);
-    animation: fadeIn 1.5s ease;
     height: auto;
   }
 
@@ -173,35 +164,36 @@
 </div>
 
 <div id="page2" class="page">
-  <div class="fancy-message">
-    Happiest birthday to the one who has my heart in ways I can’t fully explain. You have this way of talking about things that leaves me amazed every time because it's always new, may it be perspective in life or just facts that I'm not aware of. 
-    I’m truly grateful for all the warmth and happiness you bring in my life. Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and I know I'm very bad at it. 
-    2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but I'm always proud of how you're still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. 
-    You've etched a mark on me, na kapag nagshe-share ka ng hardships mo gusto ko nalang magwala kasi bakit ganon nangyayari?! Haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.
+ <div class="message fancy-message">
+Happiest birthday to the one who has my heart in ways I can’t fully explain. 💖<br><br>
+You have this way of talking about things that leaves me amazed every time because it's always new, may it be perspective in life or just facts that I'm not aware of. I’m truly grateful for all the warmth and happiness you bring in my life.  <br><br>
+Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and I know I'm very bad at it. 2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but I'm always proud of how you're still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. You've etched a mark on me, na kapag nagshe-share ka ng hardships mo gusto ko nalang magwala kasi bakit ganon nangyayari?! Haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.  
   </div>
   <button class="next-btn" id="nextBtn">Next</button>
 </div>
 
 <div id="page3" class="page">
   <div class="fancy-message">
-    Your second message goes here... 🌷
+   May gift ako sayo and andyan na yun sa mahiwagang kamay nila HWHAUAHAHA I really tried na maging gawa ko pero hindi talaga kaya ng powers. Kwento ko nalang sayo if dumating na. I hope magustuhan mo yun. 
   </div>
   <button class="back-btn" id="backBtn">Go Back</button>
 </div>
 
 <script>
-// Pages
 const pages = [
   document.getElementById('page1'),
   document.getElementById('page2'),
   document.getElementById('page3')
 ];
 function showPage(index) {
-  pages.forEach(p => p.classList.remove('active'));
+  pages.forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
   pages[index].classList.add('active');
+  pages[index].style.display = 'flex';
 }
 
-// Candles
 const tapBtn = document.getElementById('tapBtn');
 const candleContainer = document.getElementById('candles');
 const encourageText = document.getElementById('encourage');
@@ -210,21 +202,18 @@ let tapCount = 0;
 const maxCandles = 19;
 
 const messages = [
-  "Tap! Tap!", "Keep going! 💖", "You're doing amazing!",
-  "You're lighting up the day! ✨", "Malapit na mami😆", "Dami na candless",
-  "Pang-ilan na ba?", "Tap more!!", "Candles are rising! 🔥",
-  "Amazing! Keep tapping! 🎉", "Almost there!💖", "Keep shining! ✨",
-  "Love it! ❤️", "Lapit naaa", "Fantastic! 😍", "Konti nalangg",
-  "Keep going! 💛", "One more tap!", "Yey!🥳"
+"Tap! Tap!", "(⁠｡⁠•̀⁠ᴗ⁠-⁠)⁠💖!", "Keep going! ꉂ(˵˃ ᗜ ˂˵)",
+  "(⁠≧⁠▽⁠≦⁠)", "Malapit na mami😆", "Dami na candless (˶˃ᆺ˂˶)",
+  "Pang-ilan na ba?", "Tap more!!", "(﹡ˆ﹀ˆ﹡)♡",
+  "Amazing! Keep tapping! 🎉", "Almost there!💖", "<⁠(⁠￣⁠︶⁠￣⁠)⁠>✨",
+  "Love it! ❤️", "Lapit naaa („• ֊ •„)", "∩(✧Д✧)∩", "Konti nalangg ৻( •̀ ᗜ •́ ৻)",
+  "૮₍˃̵֊ ˂̵ ₎ა", "One more tap!", "Yey! ૮₍˶ᵔ ᵕ ᵔ˶ ₎ა"
 ];
-
 tapBtn.addEventListener('click', () => {
   if(tapCount < maxCandles){
     tapCount++;
-
     const candle = document.createElement('div');
     candle.classList.add('candle');
-
     const width = 12 + Math.random()*4;
     const height = 30 + Math.random()*20;
     candle.style.width = width+'px';
@@ -247,7 +236,6 @@ tapBtn.addEventListener('click', () => {
     },50);
 
     encourageText.textContent = messages[tapCount-1];
-
   } else if(tapCount === maxCandles){
     tapCount++;
     showPage(1);
@@ -257,22 +245,19 @@ tapBtn.addEventListener('click', () => {
 document.getElementById('nextBtn').addEventListener('click',()=>showPage(2));
 document.getElementById('backBtn').addEventListener('click',()=>showPage(1));
 
-// Stars
+// Star + Confetti (unchanged)
 function createStar(){
   if(!pages[0].classList.contains('active')) return;
-  const star = document.createElement('div');
+  const star=document.createElement('div');
   star.classList.add('star');
-
-  const size = 6 + Math.random()*10;
-  star.style.width = size+'px';
-  star.style.height = size+'px';
-  star.style.left = Math.random()*(window.innerWidth-size)+'px';
-
-  const duration = 4000+Math.random()*4000;
-  let startTime = null;
+  const size=6+Math.random()*10;
+  star.style.width=size+'px';
+  star.style.height=size+'px';
+  star.style.left=Math.random()*(window.innerWidth-size)+'px';
+  const duration=4000+Math.random()*4000;
+  let startTime=null;
   const sway=20;
   const rotSpeed=(Math.random()*2-1)*0.1;
-
   function animateStar(t){
     if(!startTime) startTime=t;
     const elapsed=t-startTime;
@@ -288,12 +273,10 @@ function createStar(){
 }
 setInterval(createStar,200);
 
-// Confetti
 function createConfetti(){
   if(!pages[1].classList.contains('active') && !pages[2].classList.contains('active')) return;
   const confetti=document.createElement('div');
   confetti.classList.add('confetti');
-
   const sizeW=5+Math.random()*10;
   const sizeH=8+Math.random()*12;
   confetti.style.width=sizeW+'px';
@@ -303,11 +286,9 @@ function createConfetti(){
   confetti.style.top='-10px';
   confetti.style.opacity=0.9;
   confetti.style.transform=`rotate(${Math.random()*360}deg)`;
-
   const duration=3000+Math.random()*2000;
   const sway=20+Math.random()*20;
   let startTime=null;
-
   function animateConfetti(t){
     if(!startTime) startTime=t;
     const elapsed=t-startTime;
@@ -323,6 +304,5 @@ function createConfetti(){
 }
 setInterval(createConfetti,100);
 </script>
-
 </body>
 </html>
