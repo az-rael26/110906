@@ -101,25 +101,26 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
- .fancy-message {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.2em;
-  line-height: 1.5em;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  padding: 40px 60px;
-  width: 90%;
-  max-width: 1000px;
-  text-align: justify;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  backdrop-filter: blur(6px);
-  height: auto;
-}
+  .fancy-message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 40px 60px;
+    width: 90%;
+    max-width: 1000px;
+    text-align: justify;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(6px);
+    animation: fadeIn 1.5s ease;
+    height: auto;
+  }
 
   .next-btn, .back-btn {
     position: fixed;
@@ -173,10 +174,10 @@
 
 <div id="page2" class="page">
   <div class="fancy-message">
-    Happiest birthday to the one who has my heart in ways I can’t fully explain. You have this way of talking about things that leaves me amazed every time because it's always new, may it be perspective in life or just facts that I'm not aware of. 
-    I’m truly grateful for all the warmth and happiness you bring in my life. Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and I know I'm very bad at it. 
-    2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but I'm always proud of how you're still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. 
-    You've etched a mark on me, na kapag nagshe-share ka ng hardships mo gusto ko nalang magwala kasi bakit ganon nangyayari?! Haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.
+    Happiest birthday to the one who has my heart in ways I can’t fully explain. You have this way of talking about things that leaves me amazed every time because its always new, may it be perspective in life or just facts that im not aware of. 
+    I’m truly grateful for all the warmth and happiness you bring in my life. Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and i know im very bad at it. 
+    2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but im always proud of how youre still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. 
+    You've etched a mark on me, na kapag nagshe share ka ng hardships mo gusto ko nalang magwala kasi bat ka nila ginaganon?! haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.
   </div>
   <button class="next-btn" id="nextBtn">Next</button>
 </div>
@@ -185,7 +186,7 @@
   <div class="fancy-message">
     Your second message goes here... 🌷
   </div>
-  <button class="back-btn" id="backBtn">Go Back</button>
+  <button class="back-btn" id="backBtn">Back</button>
 </div>
 
 <script>
@@ -298,30 +299,4 @@ function createConfetti(){
   confetti.style.width=sizeW+'px';
   confetti.style.height=sizeH+'px';
   confetti.style.background=['#f94144','#f3722c','#f9c74f','#90be6d','#577590','#f8961e','#43aa8b'][Math.floor(Math.random()*7)];
-  confetti.style.left=Math.random()*window.innerWidth+'px';
-  confetti.style.top='-10px';
-  confetti.style.opacity=0.9;
-  confetti.style.transform=`rotate(${Math.random()*360}deg)`;
-
-  const duration=3000+Math.random()*2000;
-  const sway=20+Math.random()*20;
-  let startTime=null;
-
-  function animateConfetti(t){
-    if(!startTime) startTime=t;
-    const elapsed=t-startTime;
-    const y=(elapsed/duration)*(window.innerHeight+20);
-    const xOffset=Math.sin(elapsed/300)*sway;
-    const rotation=elapsed*0.01*(Math.random()*2-1);
-    confetti.style.transform=`translate(${xOffset}px, ${y}px) rotate(${rotation}rad)`;
-    if(y<window.innerHeight+20) requestAnimationFrame(animateConfetti);
-    else confetti.remove();
-  }
-  requestAnimationFrame(animateConfetti);
-  document.body.appendChild(confetti);
-}
-setInterval(createConfetti,100);
-</script>
-
-</body>
-</html>
+  confetti.style.left=Math.ran
