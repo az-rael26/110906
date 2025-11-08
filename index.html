@@ -151,15 +151,6 @@
     z-index: 1;
   }
 
-  .star {
-    background: yellow;
-    clip-path: polygon(
-      50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-      50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-    );
-    opacity: 0.9;
-  }
-
   .stars-container {
     position: absolute;
     width: 100%;
@@ -168,11 +159,6 @@
     top: 0;
     left: 0;
     z-index: 0;
-  }
-
-  @keyframes floatStar {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
   }
 
   .confetti-container {
@@ -184,12 +170,6 @@
     left: 0;
     z-index: 0;
   }
-
-  @keyframes fallConfetti {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
-  }
-
 </style>
 </head>
 <body>
@@ -205,6 +185,7 @@
 <!-- PAGE 2 -->
 <div id="page2" class="page">
  <div class="message fancy-message">
+
 Happiest birthday to the one who has my heart in ways I can’t fully explain. 💖<br><br>
 You have this way of talking about things that leaves me amazed every time because it's always new, may it be perspective in life or just facts that I'm not aware of. I’m truly grateful for all the warmth and happiness you bring in my life. <br><br>
 Life is hitting hard for you these past few days and there are plenty of times na gusto ko nalang magteleport bigla diyan just to give you comfort personally kasi may times talaga na di sapat ang comforting words lang and I know I'm very bad at it. 2025 has been a hell of year maraming disappointments, setbacks, and shortcomings and I'm very proud of you for continuing to persevere amidst the fierce waves crashing on. I may not show it but I'm always proud of how you're still standing against the heavy pressure life is giving you. I admire how you keep enduring and pushing forward, it challenges me to keep doing better too. You've etched a mark on me, na kapag nagshe-share ka ng hardships mo gusto ko nalang magwala kasi bakit ganon nangyayari?! Haysss. Hindi mo deserve ang mga nangyayari sayo awat na sana si Lord sa strongest soldier na 'yan.
@@ -227,6 +208,7 @@ Life is hitting hard for you these past few days and there are plenty of times n
 <!-- PAGE 4 -->
 <div id="page4" class="page">
   <div class="fancy-message">
+   
     Happy Birthday Bebii!!<br><br>
       (っ˶ ˘ ᵕ˘)ˆᵕ ˆ˶ς)<br><br>
     Thank you for always being your genuine self. I hope this little thing brightens your day even just a bit. Continue smiling and chasing what makes your heart full. You deserve every piece of happiness coming your way. I’m always here for you, through good days and bad.<br><br>
@@ -248,7 +230,7 @@ function showPage(index) {
   pages[index].classList.add('active');
 }
 
-// --- Candle tap logic ---
+// Candle tap logic
 const tapBtn = document.getElementById('tapBtn');
 const candleContainer = document.getElementById('candles');
 const encourageText = document.getElementById('encourage');
@@ -294,46 +276,78 @@ document.getElementById('backBtn3').addEventListener('click', () => showPage(1))
 document.getElementById('nextBtn3').addEventListener('click', () => showPage(3));
 document.getElementById('backBtn4').addEventListener('click', () => showPage(2));
 
-// === STAR EFFECT FOR PAGE 1 ===
-function createStars() {
-  const starsContainer = document.createElement('div');
-  starsContainer.classList.add('stars-container');
-  document.getElementById('page1').appendChild(starsContainer);
-
-  for (let i = 0; i < 40; i++) {
-    const star = document.createElement('div');
-    star.classList.add('star');
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-    const size = Math.random() * 3 + 2;
-    star.style.width = `${size}px`;
-    star.style.height = `${size}px`;
-    star.style.animationDelay = `${Math.random() * 2}s`;
-    starsContainer.appendChild(star);
+// === Stars for Page 1 ===
+function spawnStar() {
+  if(!pages[0].classList.contains('active')) return;
+  const star = document.createElement('div');
+  star.classList.add('star');
+  const size = 2 + Math.random() * 6; // random size
+  star.style.width = `${size}px`;
+  star.style.height = `${size}px`;
+  star.style.left = `${Math.random() * window.innerWidth}px`;
+  star.style.top = `-10px`;
+  star.style.position = 'absolute';
+  star.style.background = 'yellow';
+  star.style.borderRadius = '50%';
+  star.style.opacity = 0.8;
+  
+  const duration = 4000 + Math.random() * 3000;
+  const sway = 20 + Math.random() * 20;
+  const rotSpeed = (Math.random() * 2 - 1) * 0.05;
+  let startTime = null;
+  
+  function animate(t) {
+    if (!startTime) startTime = t;
+    const elapsed = t - startTime;
+    const y = (elapsed / duration) * (window.innerHeight + 40);
+    const xOffset = Math.sin(elapsed / 500) * sway;
+    const rotation = elapsed * rotSpeed;
+    star.style.transform = `translate(${xOffset}px, ${y}px) rotate(${rotation}rad)`;
+    if(y < window.innerHeight + 40) requestAnimationFrame(animate);
+    else star.remove();
   }
+  
+  requestAnimationFrame(animate);
+  document.body.appendChild(star);
 }
-createStars();
+setInterval(spawnStar, 200);
 
-// === CONFETTI EFFECT FOR PAGE 2, 3, 4 ===
-function createConfettiForPage(pageId) {
-  const confettiContainer = document.createElement('div');
-  confettiContainer.classList.add('confetti-container');
-  document.getElementById(pageId).appendChild(confettiContainer);
-
-  for (let i = 0; i < 60; i++) {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
-    confetti.style.left = `${Math.random() * 100}%`;
-    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
-    confetti.style.width = `${Math.random() * 8 + 4}px`;
-    confetti.style.height = `${Math.random() * 14 + 6}px`;
-    confetti.style.animationDelay = `${Math.random() * 3}s`;
-    confettiContainer.appendChild(confetti);
+// === Confetti for Pages 2–4 ===
+function spawnConfetti(pageId){
+  if(!document.getElementById(pageId).classList.contains('active')) return;
+  const conf = document.createElement('div');
+  conf.classList.add('confetti');
+  
+  conf.style.width = `${4 + Math.random()*6}px`;
+  conf.style.height = `${6 + Math.random()*10}px`;
+  conf.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
+  conf.style.position = 'absolute';
+  conf.style.left = `${Math.random() * window.innerWidth}px`;
+  conf.style.top = `-10px`;
+  
+  const duration = 3000 + Math.random()*2000;
+  const sway = 20 + Math.random()*20;
+  const rotSpeed = (Math.random() * 2 - 1) * 0.05;
+  let startTime = null;
+  
+  function animate(t){
+    if(!startTime) startTime = t;
+    const elapsed = t - startTime;
+    const y = (elapsed/duration)*(window.innerHeight + 20);
+    const xOffset = Math.sin(elapsed/300)*sway;
+    const rotation = elapsed*rotSpeed*50;
+    conf.style.transform = `translate(${xOffset}px, ${y}px) rotate(${rotation}deg)`;
+    if(y < window.innerHeight + 20) requestAnimationFrame(animate);
+    else conf.remove();
   }
+  
+  requestAnimationFrame(animate);
+  document.getElementById(pageId).appendChild(conf);
 }
-createConfettiForPage('page2');
-createConfettiForPage('page3');
-createConfettiForPage('page4');
+
+setInterval(()=>spawnConfetti('page2'), 150);
+setInterval(()=>spawnConfetti('page3'), 150);
+setInterval(()=>spawnConfetti('page4'), 150);
 
 </script>
 </body>
